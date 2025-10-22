@@ -27,6 +27,16 @@ using (var scope = app.Services.CreateScope())
     {
         var db = services.GetRequiredService<ApplicationDbContext>();
         db.Database.Migrate();
+
+        if (db.Users.FirstOrDefault(u => u.Id == AppConsts.UserId) is null)
+        {
+            db.Users.Add(new Pawlin.Common.Entities.User
+            {
+                Id = AppConsts.UserId,
+                Name = "Default User"
+            });
+            db.SaveChanges();
+        }
     }
     catch (Exception ex)
     {
