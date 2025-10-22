@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Pawlin.Common.Entities;
 using Pawlin.Common.Repositories;
+using System.Collections.Immutable;
 
 namespace Pawlin.Data.Repositories
 {
@@ -19,12 +20,29 @@ namespace Pawlin.Data.Repositories
                 .AsNoTracking()
                 .ToArrayAsync();
 
-        public Task<ReviewDataItem?> GetNearestScheduledReview(int deckInstanceId)
-            => dbContext.ReviewDataItems
+        public async Task<ReviewDataItem?> GetNearestScheduledReview(int deckInstanceId)
+        {
+            var items = await dbContext.ReviewDataItems
                 .Include(e => e.Flashcard)
                 .Where(e => e.DeckInstanceId == deckInstanceId)
-                .OrderBy(e => e.NextReviewDateUtc)
-                .AsNoTracking()
-                .FirstOrDefaultAsync();
+                .GroupBy(e => e.FlashcardId, (id, reviewDataItems) => reviewDataItems.OrderByDescending(e => e.ReviewDateUtc).FirstOrDefault())
+                .ToArrayAsync();
+
+            DateTime nearestDate = DateTime.MaxValue;
+            ReviewDataItem? nearestReview = null;
+            foreach (var item in items)
+            {
+                if (item == null)
+                    continue;
+
+                if (item.NextReviewDateUtc < nearestDate)
+                {
+                    nearestDate = item.NextReviewDateUtc;
+                    nearestReview = item;
+                }
+            }
+
+            return nearestReview;
+        }
     }
 }

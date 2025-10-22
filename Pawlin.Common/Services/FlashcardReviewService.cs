@@ -39,22 +39,22 @@ namespace Pawlin.Common.Services
             var reviewData = await reviewHistoryRepository.GetNearestScheduledReview(deckInstance.Id);
             
             if (reviewData is null)
-                return GetUnreviewedFlashcard(deckInstance);
+                return GetUnreviewedFlashcard(deckInstance)!;
 
             if (reviewData.NextReviewDateUtc > DateTime.UtcNow)
             {
                 var unreviewed = GetUnreviewedFlashcard(deckInstance);
-                if (unreviewed is null)
-                    return reviewData.Flashcard!;
+                if (unreviewed is not null)
+                    return unreviewed;
             }
 
             return reviewData.Flashcard!;
         }
 
-        private static Flashcard GetUnreviewedFlashcard(DeckInstance deckInstance)
+        private static Flashcard? GetUnreviewedFlashcard(DeckInstance deckInstance)
         {
             return deckInstance.Deck!.Flashcards
-                !.FirstOrDefault(f => !deckInstance.ReviewHistory!.Any(rh => rh.FlashcardId == f.Id))!;
+                !.FirstOrDefault(f => !deckInstance.ReviewHistory!.Any(rh => rh.FlashcardId == f.Id));
         }
     }
 }
