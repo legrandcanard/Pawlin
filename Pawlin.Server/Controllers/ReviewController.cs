@@ -15,7 +15,7 @@ namespace Pawlin.Server.Controllers
         : ControllerBase
     {
 
-        [HttpGet("next")]
+        [HttpGet("{deckInstanceId:int}/next")]
         public async Task<ActionResult<FlashcardDto>> GetNextCard(int deckInstanceId)
         {
             var deckInstance = await deckRepository.GetDeckInstance(deckInstanceId);
@@ -24,10 +24,10 @@ namespace Pawlin.Server.Controllers
             return nextFlashcard.Adapt<FlashcardDto>();
         }
 
-        [HttpPost("review")]
-        public async Task<ActionResult<ReviewDataItemDto>> ReviewFlashcard(ReviewDto dto)
+        [HttpPost("{deckInstanceId:int}/review")]
+        public async Task<ActionResult<ReviewDataItemDto>> ReviewFlashcard(int deckInstanceId, [FromBody] ReviewDto dto)
         {
-            var deckInstance = await deckRepository.GetDeckInstance(dto.DeckInstanceId);
+            var deckInstance = await deckRepository.GetDeckInstance(deckInstanceId);
             var flashcard = await flashcardRepository.GetByIdAsync(dto.FlashcardId);
 
             var reviewData = await flashcardReviewService.Review(deckInstance, flashcard!, dto.Quality);
