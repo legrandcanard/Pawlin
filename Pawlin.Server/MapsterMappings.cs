@@ -3,9 +3,9 @@ using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Pawlin.Common.Entities;
-using Pawlin.Server.Dto;
+using Pawlin.WebApi.Dto;
 
-namespace Pawlin.Common.Dtos
+namespace Pawlin.WebApi
 {
     public static class MapsterMappings
     {

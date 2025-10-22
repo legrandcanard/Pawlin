@@ -3,7 +3,7 @@ using Pawlin.Common.Repositories;
 using Pawlin.Common.Services;
 using Pawlin.Data.Repositories;
 
-namespace Pawlin.Server
+namespace Pawlin.WebApi
 {
     public static class Setup
     {

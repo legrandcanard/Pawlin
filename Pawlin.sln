@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.Server", "Pawlin.Server\Pawlin.Server.csproj", "{40E533E4-CB67-44BC-B0B5-372720C9183E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.WebApi", "Pawlin.Server\Pawlin.WebApi.csproj", "{40E533E4-CB67-44BC-B0B5-372720C9183E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.Common", "Pawlin.Common\Pawlin.Common.csproj", "{4613EECC-14E7-42FA-B507-9C179D2CBDB4}"
 EndProject

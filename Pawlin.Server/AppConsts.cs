@@ -1,4 +1,4 @@
-﻿namespace Pawlin.Server
+﻿namespace Pawlin.WebApi
 {
     public static class AppConsts
     {

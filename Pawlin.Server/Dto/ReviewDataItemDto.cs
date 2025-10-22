@@ -1,5 +1,4 @@
-
-namespace Pawlin.Server.Dto
+namespace Pawlin.WebApi.Dto
 {
     public class ReviewDataItemDto
     {

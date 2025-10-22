@@ -2,9 +2,10 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Pawlin.Common.Entities;
 using Pawlin.Common.Repositories;
-using Pawlin.Server.Dto;
+using Pawlin.WebApi;
+using Pawlin.WebApi.Dto;
 
-namespace Pawlin.Server.Controllers
+namespace Pawlin.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

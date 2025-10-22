@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Pawlin.Common.Dtos;
 using Pawlin.Data;
-using Pawlin.Server;
+using Pawlin.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
