@@ -19,71 +19,117 @@ namespace Pawlin.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Flashcard
-            modelBuilder.Entity<Flashcard>(e =>
-            {
-                e.HasKey(x => x.Id);
-                e.Property(x => x.Answer).IsRequired();
-                e.Property(x => x.Question).IsRequired();
-            });
-
-            // User
+            // Users
             modelBuilder.Entity<User>(e =>
             {
-                e.HasKey(x => x.Id);
+                e.ToTable("Users");
+                e.HasKey(u => u.Id);
+                e.Property(u => u.Name).HasMaxLength(200).IsRequired(false);
 
-                e.HasMany<DeckInstance>()
+                e.HasMany(u => u.DeckInstances)
                     .WithOne(di => di.User)
                     .HasForeignKey(di => di.UserId)
-                    .IsRequired();
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // Deck
+            // Decks
             modelBuilder.Entity<Deck>(e =>
             {
-                e.HasKey(x => x.Id);
+                e.ToTable("Decks");
+                e.HasKey(d => d.Id);
+                e.Property(d => d.Title).IsRequired();
 
                 e.HasMany(d => d.Flashcards)
                     .WithOne()
-                    .HasForeignKey(e => e.DeckId)
-                    .IsRequired();
+                    .HasForeignKey(f => f.DeckId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 e.HasOne<User>()
                     .WithMany()
                     .HasForeignKey(d => d.CreatorUserId)
-                    .IsRequired();
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                e.HasIndex(d => d.CreatorUserId);
             });
 
-            // DeckInstance
+            // Flashcards
+            modelBuilder.Entity<Flashcard>(e =>
+            {
+                e.ToTable("Flashcards");
+                e.HasKey(f => f.Id);
+                e.Property(f => f.Question).IsRequired();
+                e.Property(f => f.Answer).IsRequired();
+
+                e.HasIndex(f => f.DeckId);
+            });
+
+            // DeckInstances
             modelBuilder.Entity<DeckInstance>(e =>
             {
+                e.ToTable("DeckInstances");
                 e.HasKey(di => di.Id);
 
                 e.HasOne(di => di.Deck)
                     .WithMany()
                     .HasForeignKey(di => di.DeckId)
-                    .IsRequired();
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                e.HasOne(di => di.User)
+                    .WithMany(u => u.DeckInstances)
+                    .HasForeignKey(di => di.UserId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                e.HasMany(di => di.ReviewHistory)
+                    .WithOne(r => r.DeckInstance)
+                    .HasForeignKey(r => r.DeckInstanceId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                e.HasIndex(di => di.DeckId);
+                e.HasIndex(di => di.UserId);
             });
 
-            // ReviewDataHistoryItem
+            // ReviewDataItems
             modelBuilder.Entity<ReviewDataItem>(e =>
             {
-                e.HasKey(x => x.Id);
+                e.ToTable("ReviewDataItems");
+                e.HasKey(r => r.Id);
+
+                e.Property(r => r.Repeats).HasDefaultValue(0);
+                e.Property(r => r.EasinessFactor).HasDefaultValue(2.5d);
+                e.Property(r => r.InvervalDays).HasDefaultValue(0);
+                e.Property(r => r.Quality).HasDefaultValue(0);
+
+                e.Property(r => r.NextReviewDateUtc).IsRequired();
+                e.Property(r => r.ReviewDateUtc).IsRequired();
 
                 e.HasOne(r => r.Flashcard)
                     .WithMany()
                     .HasForeignKey(r => r.FlashcardId)
-                    .IsRequired();
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 e.HasOne(r => r.User)
                     .WithMany()
                     .HasForeignKey(r => r.UserId)
-                    .IsRequired();
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 e.HasOne(r => r.DeckInstance)
-                    .WithMany()
+                    .WithMany(di => di.ReviewHistory)
                     .HasForeignKey(r => r.DeckInstanceId)
-                    .IsRequired();
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                e.HasIndex(r => r.FlashcardId);
+                e.HasIndex(r => r.UserId);
+                e.HasIndex(r => r.DeckInstanceId);
+                e.HasIndex(r => new { r.DeckInstanceId, r.NextReviewDateUtc });
             });
         }
     }

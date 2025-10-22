@@ -8,7 +8,6 @@ namespace Pawlin.Server.Dto
         public int UserId { get; set; }
 
         public DeckDto? Deck { get; set; }
-        public UserDto? User { get; set; }
 
         public ReviewDataItemDto[]? ReviewHistory { get; set; }
     }

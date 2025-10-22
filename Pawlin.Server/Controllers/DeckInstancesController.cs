@@ -11,9 +11,13 @@ namespace Pawlin.Server.Controllers
     public class DeckInstancesController(IDeckRepository deckRepository) : ControllerBase
     {
         [HttpPost]
-        public async Task<ActionResult<DeckInstanceDto>> Create([FromBody] DeckInstanceDto dto)
+        public async Task<ActionResult<DeckInstanceDto>> Create([FromQuery] int deckId)
         {
-            var entity = dto.Adapt<DeckInstance>();
+            var entity = new DeckInstance
+            {
+                DeckId = deckId,
+                UserId = AppConsts.UserId
+            };
             await deckRepository.AddDeckInstance(entity);
 
             var created = await deckRepository.GetDeckInstance(entity.Id);

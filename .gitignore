@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Pawlin.Server/Pawlin.db
+/Pawlin.Server/Pawlin.db-shm
+/Pawlin.Server/Pawlin.db-wal

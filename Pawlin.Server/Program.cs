@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(opts =>
 {
-    opts.UseInMemoryDatabase("PawlinDb");
+    opts.UseSqlite("Data Source=Pawlin.db");
 });
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -18,6 +18,23 @@ builder.Services.AddMapsterMappings();
 builder.Services.RegisterServices();
 
 var app = builder.Build();
+
+// Initialize database
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var db = services.GetRequiredService<ApplicationDbContext>();
+        db.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating or initializing the database.");
+        throw;
+    }
+}
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
