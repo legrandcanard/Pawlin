@@ -1,0 +1,6 @@
+@Pawlin.Server_HostAddress = http://localhost:5140
+
+GET {{Pawlin.Server_HostAddress}}/flashcards/
+Accept: application/json
+
+###

@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "pawlin.client", "pawlin.client\pawlin.client.esproj", "{8FEA6A2C-5566-F096-D332-AC5693718421}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.Server", "Pawlin.Server\Pawlin.Server.csproj", "{40E533E4-CB67-44BC-B0B5-372720C9183E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.Common", "Pawlin.Common\Pawlin.Common.csproj", "{4613EECC-14E7-42FA-B507-9C179D2CBDB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.Data", "Pawlin.Data\Pawlin.Data.csproj", "{DEBF704A-05C6-48FB-95CD-51BD1623DDBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.Common.Tests", "Pawlin.Common.Tests\Pawlin.Common.Tests.csproj", "{6CB56762-D7A6-4973-9893-E0F7D916C8FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FEA6A2C-5566-F096-D332-AC5693718421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEA6A2C-5566-F096-D332-AC5693718421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEA6A2C-5566-F096-D332-AC5693718421}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8FEA6A2C-5566-F096-D332-AC5693718421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEA6A2C-5566-F096-D332-AC5693718421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FEA6A2C-5566-F096-D332-AC5693718421}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{40E533E4-CB67-44BC-B0B5-372720C9183E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E533E4-CB67-44BC-B0B5-372720C9183E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E533E4-CB67-44BC-B0B5-372720C9183E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E533E4-CB67-44BC-B0B5-372720C9183E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4613EECC-14E7-42FA-B507-9C179D2CBDB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4613EECC-14E7-42FA-B507-9C179D2CBDB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4613EECC-14E7-42FA-B507-9C179D2CBDB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4613EECC-14E7-42FA-B507-9C179D2CBDB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEBF704A-05C6-48FB-95CD-51BD1623DDBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEBF704A-05C6-48FB-95CD-51BD1623DDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEBF704A-05C6-48FB-95CD-51BD1623DDBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEBF704A-05C6-48FB-95CD-51BD1623DDBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CB56762-D7A6-4973-9893-E0F7D916C8FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CB56762-D7A6-4973-9893-E0F7D916C8FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CB56762-D7A6-4973-9893-E0F7D916C8FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CB56762-D7A6-4973-9893-E0F7D916C8FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6CB56762-D7A6-4973-9893-E0F7D916C8FC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C369528E-36EA-400D-BAB8-0458E2B3EC1D}
+	EndGlobalSection
+EndGlobal
