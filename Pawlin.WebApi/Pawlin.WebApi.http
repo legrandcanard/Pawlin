@@ -1,6 +1,0 @@
-@Pawlin.WebApi_HostAddress = http://localhost:5140
-
-GET {{Pawlin.WebApi_HostAddress}}/flashcards/
-Accept: application/json
-
-###
