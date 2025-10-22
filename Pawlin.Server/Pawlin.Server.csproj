@@ -34,9 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\pawlin.client\pawlin.client.esproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\Pawlin.Data\Pawlin.Data.csproj" />
   </ItemGroup>
 

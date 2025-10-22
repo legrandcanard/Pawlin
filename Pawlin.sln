@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "pawlin.client", "pawlin.client\pawlin.client.esproj", "{8FEA6A2C-5566-F096-D332-AC5693718421}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.Server", "Pawlin.Server\Pawlin.Server.csproj", "{40E533E4-CB67-44BC-B0B5-372720C9183E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pawlin.Common", "Pawlin.Common\Pawlin.Common.csproj", "{4613EECC-14E7-42FA-B507-9C179D2CBDB4}"
@@ -21,12 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8FEA6A2C-5566-F096-D332-AC5693718421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FEA6A2C-5566-F096-D332-AC5693718421}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FEA6A2C-5566-F096-D332-AC5693718421}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{8FEA6A2C-5566-F096-D332-AC5693718421}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FEA6A2C-5566-F096-D332-AC5693718421}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FEA6A2C-5566-F096-D332-AC5693718421}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{40E533E4-CB67-44BC-B0B5-372720C9183E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{40E533E4-CB67-44BC-B0B5-372720C9183E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40E533E4-CB67-44BC-B0B5-372720C9183E}.Release|Any CPU.ActiveCfg = Release|Any CPU
