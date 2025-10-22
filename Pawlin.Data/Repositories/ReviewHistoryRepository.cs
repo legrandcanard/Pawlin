@@ -21,6 +21,7 @@ namespace Pawlin.Data.Repositories
 
         public Task<ReviewDataItem?> GetNearestScheduledReview(int deckInstanceId)
             => dbContext.ReviewDataItems
+                .Include(e => e.Flashcard)
                 .Where(e => e.DeckInstanceId == deckInstanceId)
                 .OrderBy(e => e.NextReviewDateUtc)
                 .AsNoTracking()

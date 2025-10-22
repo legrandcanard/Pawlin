@@ -1,4 +1,5 @@
-﻿using Pawlin.Common.Repositories;
+﻿using Pawlin.Common;
+using Pawlin.Common.Repositories;
 using Pawlin.Common.Services;
 using Pawlin.Data.Repositories;
 
@@ -12,6 +13,7 @@ namespace Pawlin.Server
             services.AddTransient<IFlashcardRepository, FlashcardRepository>();
             services.AddTransient<IReviewHistoryRepository, ReviewHistoryRepository>();
             services.AddTransient<IFlashcardReviewService, FlashcardReviewService>();
+            services.AddTransient<IFlashcardReviewer, FlashcardReviewer>();
 
             return services;
         }

@@ -5,7 +5,7 @@ namespace Pawlin.Common.Services
 {
     public interface IFlashcardReviewService
     {
-        Task Review(DeckInstance deckInstance, Flashcard flashcard, int quality);
+        Task<ReviewDataItem> Review(DeckInstance deckInstance, Flashcard flashcard, int quality);
         Task<Flashcard> GetNextFlashcard(DeckInstance deckInstance);
     }
 
@@ -14,23 +14,39 @@ namespace Pawlin.Common.Services
         IReviewHistoryRepository reviewHistoryRepository) : IFlashcardReviewService
     {
 
-        public async Task Review(DeckInstance deckInstance, Flashcard flashcard, int quality)
+        public async Task<ReviewDataItem> Review(DeckInstance deckInstance, Flashcard flashcard, int quality)
         {
             var history = await reviewHistoryRepository.GetReviewHistory(flashcard.Id, deckInstance.UserId);
 
-            var prevReviewData = history.LastOrDefault() ?? new ReviewDataItem();
+            var prevReviewData = history.LastOrDefault() ?? new ReviewDataItem 
+            { 
+                UserId = deckInstance.UserId,
+                FlashcardId = flashcard.Id,
+                Flashcard = flashcard,
+                DeckInstanceId = deckInstance.Id,
+                DeckInstance = deckInstance
+            };
 
             var newReviewData = flashcardReviewer.Review(prevReviewData, quality);
 
             await reviewHistoryRepository.AddReviewHistoryItem(newReviewData);
+
+            return newReviewData;
         }
 
         public async Task<Flashcard> GetNextFlashcard(DeckInstance deckInstance)
         {
             var reviewData = await reviewHistoryRepository.GetNearestScheduledReview(deckInstance.Id);
             
-            if (reviewData is null || reviewData.NextReviewDateUtc > DateTime.UtcNow)
+            if (reviewData is null)
                 return GetUnreviewedFlashcard(deckInstance);
+
+            if (reviewData.NextReviewDateUtc > DateTime.UtcNow)
+            {
+                var unreviewed = GetUnreviewedFlashcard(deckInstance);
+                if (unreviewed is null)
+                    return reviewData.Flashcard!;
+            }
 
             return reviewData.Flashcard!;
         }

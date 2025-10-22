@@ -39,7 +39,8 @@ namespace Pawlin.Common
                 ReviewDateUtc = lastReviewDate,
                 NextReviewDateUtc = lastReviewDate.AddDays(i),
                 FlashcardId = prevReviewData.FlashcardId,
-                UserId = prevReviewData.UserId
+                UserId = prevReviewData.UserId,
+                DeckInstanceId = prevReviewData.DeckInstanceId
             };
 
             return newReviewData;
