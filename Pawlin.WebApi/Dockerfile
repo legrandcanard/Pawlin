@@ -19,20 +19,19 @@ RUN apt-get -y install nodejs
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Pawlin.Server/Pawlin.Server.csproj", "Pawlin.Server/"]
-COPY ["pawlin.client/pawlin.client.esproj", "pawlin.client/"]
-RUN dotnet restore "./Pawlin.Server/Pawlin.Server.csproj"
+COPY ["Pawlin.WebApi/Pawlin.WebApi.csproj", "Pawlin.WebApi/"]
+RUN dotnet restore "./Pawlin.WebApi/Pawlin.WebApi.csproj"
 COPY . .
-WORKDIR "/src/Pawlin.Server"
-RUN dotnet build "./Pawlin.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Pawlin.WebApi"
+RUN dotnet build "./Pawlin.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Pawlin.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Pawlin.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Pawlin.Server.dll"]
+ENTRYPOINT ["dotnet", "Pawlin.WebApi.dll"]
